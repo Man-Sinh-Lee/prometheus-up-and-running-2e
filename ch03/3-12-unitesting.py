@@ -1,3 +1,5 @@
+#!/usr/bin/env python3
+
 import unittest
 from prometheus_client import Counter, REGISTRY
 
