@@ -2,7 +2,7 @@ global:
   config_version: 2
 input:
   type: file
-  path: example.log
+  path: '/var/log/haproxy.log'
   readall: true  # Use false in production
 grok:
   additional_patterns:

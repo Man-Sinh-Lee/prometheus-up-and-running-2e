@@ -5,7 +5,7 @@ Chapter 4 dives into how to expose metrics from applications in various programm
 #### **Python**:
 - **Exposing Metrics**: In Python, you can use the `start_http_server()` method from the Prometheus Python client to expose metrics on an HTTP endpoint. This method spins up a basic web server that serves metrics under `/metrics`.
 - **WSGI and Twisted**: For more advanced use cases, like web applications, WSGI can integrate metrics exposition into existing web servers. For asynchronous applications, Twisted also supports exposing metrics.
-- **Multiprocessing**: In cases where Python applications use multiple processes (due to the Global Interpreter Lock or for parallel tasks), a **multiprocess mode** is necessary. Each process writes its metrics to a temporary file, which Prometheus then aggregates during scraping.
+- **MultiProcessing**: In cases where Python applications use multiple processes (due to the Global Interpreter Lock or for parallel tasks), a **multi-process mode** is necessary. Each process writes its metrics to a temporary file, which Prometheus then aggregates during scraping.
 
 #### **Go**:
 - **Exposing Metrics**: In Go, exposing metrics is typically done via an HTTP handler integrated into the application. The Go client library makes this simple by providing an `http.Handle` function that automatically serves metrics at `/metrics`.

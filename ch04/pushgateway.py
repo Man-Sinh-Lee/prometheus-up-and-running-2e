@@ -8,7 +8,7 @@ duration = Gauge('my_job_duration_seconds',
 def stress_test():
     # Simulating a CPU-bound workload.
     total = 0
-    for i in range(10**7):
+    for i in range(10**10):
         total += i * i  # Simple computation to increase CPU load
     return total
 
