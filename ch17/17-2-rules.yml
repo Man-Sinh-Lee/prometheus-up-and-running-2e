@@ -1,5 +1,5 @@
 groups:
- - name: example
+ - name: elk
    rules:
     - record: job:process_cpu_seconds:rate5m
       expr: sum without(instance)(rate(process_cpu_seconds_total[5m]))
