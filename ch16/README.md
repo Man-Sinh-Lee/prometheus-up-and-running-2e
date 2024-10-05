@@ -106,7 +106,7 @@ PromQL includes functions to extract components of time.
 - **`minute()`, `hour()`, `day_of_week()`, etc.**: Extracts parts of the current time.
   - **Example**:
     ```promql
-    day_of_week(time())
+    day_of_week(timestamp(node_cpu_seconds_total))
     ```
 
 - **`timestamp()`**: Returns the timestamp of the last sample in a time series.
