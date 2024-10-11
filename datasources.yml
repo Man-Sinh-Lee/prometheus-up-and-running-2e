@@ -1,0 +1,11 @@
+apiVersion: 1
+datasources:
+- isDefault: true
+  name: Prometheus
+  type: prometheus
+  url: http://4225a859241c.mylabserver.com:9090
+- name: Alertmanager
+  access: proxy
+  implementation: prometheus
+  type: alertmanager
+  url: http://4225a859241c.mylabserver.com:9093

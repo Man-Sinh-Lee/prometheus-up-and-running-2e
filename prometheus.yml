@@ -39,7 +39,7 @@ scrape_configs:
       insecure_skip_verify: true
     basic_auth:
       username: 'admin'
-      password: 'CHANGEME'    
+      password: 'bWFuLXNpbmgtbGVlQE1hY01pbmkK'    
     static_configs:
       - targets: ['4225a859241c.mylabserver.com:9090']
     metric_relabel_configs:
@@ -54,12 +54,26 @@ scrape_configs:
   - job_name: mysql
     honor_labels: true
     static_configs:
-      - targets: ["4225a859241c.mylabserver.com:9104"]
+      - targets: ["4225a859241c.mylabserver.com:9104", "4225a859242c.mylabserver.com:9104", "4225a859243c.mylabserver.com:9104", "4225a859244c.mylabserver.com:9104"]
 
   - job_name: grok
     honor_labels: true
     static_configs:
-      - targets: ["4225a859241c.mylabserver.com:9144"]      
+      - targets: ["4225a859241c.mylabserver.com:9144", "4225a859242c.mylabserver.com:9144", "4225a859243c.mylabserver.com:9144", "4225a859244c.mylabserver.com:9144"]      
+
+  - job_name: haproxy
+    honor_labels: true
+    static_configs:
+      - targets: ["4225a859241c.mylabserver.com:9101"]
+    # metric_relabel_configs:
+    #   - source_labels: [__name__]
+    #     regex: 'haproxy_(process_|frontend_|listener_|backend_|server_check_status).*'
+    #     action: keep      
+
+  - job_name: nginx_exporter
+    honor_labels: true
+    static_configs:
+      - targets: ["4225a859242c.mylabserver.com:9113", "4225a859243c.mylabserver.com:9113", "4225a859244c.mylabserver.com:9113"] 
 
   # - job_name: 'book_app'
   #   scrape_interval: 5s

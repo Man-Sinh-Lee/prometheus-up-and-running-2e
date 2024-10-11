@@ -1,0 +1,7 @@
+tls_server_config:
+  cert_file: fullchain.pem
+  key_file: privkey.pem
+
+# specify username and password generated above
+basic_auth_users:
+  admin: $2y$05$/csIkNo61iheVjHYHAdCVerYkmv5/gL6xVgqVFTcWwcYYiql1ITj2

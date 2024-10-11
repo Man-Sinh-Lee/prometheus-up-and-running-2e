@@ -1,0 +1,13 @@
+[Unit]
+Description=Grok Exporter
+After=network.target
+
+[Service]
+User=grok_exporter
+Group=grok_exporter
+ExecStart=/usr/local/bin/grok_exporter -config=/etc/grok_exporter/config.yml
+Restart=always
+RestartSec=10
+
+[Install]
+WantedBy=multi-user.target
