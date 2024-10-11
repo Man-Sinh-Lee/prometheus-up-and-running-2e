@@ -1,0 +1,195 @@
+# Sample config for Prometheus.
+
+global:
+  scrape_interval:     15s # Set the scrape interval to every 15 seconds. Default is every 1 minute.
+  evaluation_interval: 15s # Evaluate rules every 15 seconds. The default is every 1 minute.
+  # scrape_timeout is set to the global default (10s).
+
+  # Attach these labels to any time series or alerts when communicating with
+  # external systems (federation, remote storage, Alertmanager).
+  external_labels:
+      monitor: 'external'
+
+# Alertmanager configuration
+alerting:
+  alertmanagers:
+  - static_configs:
+    - targets: ['4225a859241c.mylabserver.com:9093']
+
+# Load rules once and periodically evaluate them according to the global 'evaluation_interval'.
+rule_files:
+  #- "rules.yml"
+  - "alert_rules.yml"
+
+# A scrape configuration containing exactly one endpoint to scrape:
+# Here it's Prometheus itself.
+scrape_configs:
+  # The job name is added as a label `job=<job_name>` to any timeseries scraped from this config.
+  - job_name: 'prometheus'
+    scrape_interval: 5s
+    scrape_timeout: 5s
+    # metrics_path defaults to '/metrics'
+    # scheme defaults to 'http'.
+    # add settings for certificate and authentication
+    scheme: https
+    tls_config:
+      cert_file: /etc/prometheus/fullchain.pem
+      key_file: /etc/prometheus/privkey.pem
+      # if using self-signed certificate, set [true]
+      insecure_skip_verify: true
+    basic_auth:
+      username: 'admin'
+      password: 'bWFuLXNpbmgtbGVlQE1hY01pbmkK'    
+    static_configs:
+      - targets: ['4225a859241c.mylabserver.com:9090']
+    metric_relabel_configs:
+    - regex: 'container_label_.*'
+      action: labeldrop
+
+  - job_name: pushgateway
+    honor_labels: true
+    static_configs:
+      - targets: ["4225a859241c.mylabserver.com:9091"]     
+
+  - job_name: mysql
+    honor_labels: true
+    static_configs:
+      - targets: ["4225a859241c.mylabserver.com:9104", "4225a859242c.mylabserver.com:9104", "4225a859243c.mylabserver.com:9104", "4225a859244c.mylabserver.com:9104"]
+
+  - job_name: grok
+    honor_labels: true
+    static_configs:
+      - targets: ["4225a859241c.mylabserver.com:9144", "4225a859242c.mylabserver.com:9144", "4225a859243c.mylabserver.com:9144", "4225a859244c.mylabserver.com:9144"]      
+
+  - job_name: haproxy
+    honor_labels: true
+    static_configs:
+      - targets: ["4225a859241c.mylabserver.com:9101"]
+    # metric_relabel_configs:
+    #   - source_labels: [__name__]
+    #     regex: 'haproxy_(process_|frontend_|listener_|backend_|server_check_status).*'
+    #     action: keep      
+
+  - job_name: nginx_exporter
+    honor_labels: true
+    static_configs:
+      - targets: ["4225a859242c.mylabserver.com:9113", "4225a859243c.mylabserver.com:9113", "4225a859244c.mylabserver.com:9113"] 
+
+  # - job_name: 'book_app'
+  #   scrape_interval: 5s
+  #   scrape_timeout: 5s
+  #   static_configs:
+  #     - targets: ['4225a859241c.mylabserver.com:8000']
+
+
+  - job_name: 'elk'
+    scrape_interval: 5s
+    scrape_timeout: 5s
+    static_configs:
+      - targets: ['4225a859241c.mylabserver.com:9100', '4225a859242c.mylabserver.com:9100', '4225a859243c.mylabserver.com:9100', '4225a859244c.mylabserver.com:9100']
+
+  # - job_name: 'consul'
+  #   scrape_interval: 5s
+  #   scrape_timeout: 5s
+  #   consul_sd_configs:
+  #     - targets: ['4225a859241c.mylabserver.com:8500', '4225a859242c.mylabserver.com:8500', '4225a859243c.mylabserver.com:8500', '4225a859244c.mylabserver.com:8500']
+
+  # - job_name: 'consul_exporter'
+  #   scrape_interval: 5s
+  #   scrape_timeout: 5s
+  #   static_configs:
+  #     - targets: ['4225a859241c.mylabserver.com:9107', '4225a859242c.mylabserver.com:9107', '4225a859243c.mylabserver.com:9107', '4225a859244c.mylabserver.com:9100']      
+
+  # - job_name: 'cadvisor'
+  #   scrape_interval: 5s
+  #   scrape_timeout: 5s  
+  #   static_configs:
+  #     - targets: ['4225a859241c.mylabserver.com:8000']
+
+  - job_name: 'blackbox_icmp'
+    metrics_path: /probe
+    params:
+      module: [icmp]
+    static_configs:
+      - targets: ['4225a859241c.mylabserver.com', '4225a859242c.mylabserver.com', '4225a859243c.mylabserver.com', '4225a859244c.mylabserver.com']      
+    relabel_configs:
+      - source_labels: [__address__]
+        target_label: __param_target
+      - source_labels: [__param_target]
+        target_label: instance
+      - target_label: __address__
+        replacement: 4225a859241c.mylabserver.com:9115
+
+  # the case to use [ssh_banner] module
+  - job_name: 'blackbox_ssh'
+    metrics_path: /probe
+    params:
+      module: [ssh_banner]
+    static_configs:
+      - targets: ['4225a859241c.mylabserver.com:22', '4225a859242c.mylabserver.com:22', '4225a859243c.mylabserver.com:22', '4225a859244c.mylabserver.com:22']      
+    relabel_configs:
+      - source_labels: [__address__]
+        target_label: __param_target
+      - source_labels: [__param_target]
+        target_label: instance
+      - target_label: __address__
+        replacement: 4225a859241c.mylabserver.com:9115
+
+  # the case to use [tcp_connect] module
+  - job_name: 'blackbox_tcp'
+    metrics_path: /probe
+    params:
+      module: [tcp_connect]
+    static_configs:
+      - targets: ['4225a859241c.mylabserver.com:3306', '4225a859242c.mylabserver.com:3306', '4225a859243c.mylabserver.com:3306', '4225a859244c.mylabserver.com:3306']      
+    relabel_configs:
+      - source_labels: [__address__]
+        target_label: __param_target
+      - source_labels: [__param_target]
+        target_label: instance
+      - target_label: __address__
+        replacement: 4225a859241c.mylabserver.com:9115       
+
+  - job_name: 'blackbox_https'
+    metrics_path: /probe
+    params:
+      module: [https_2xx]
+    static_configs:
+      - targets: ["oreilly.com", "prometheus.io", "cia.gov"]
+    relabel_configs:
+      - source_labels: [__address__]
+        target_label: __param_target
+      - source_labels: [__param_target]
+        target_label: instance
+      - target_label: __address__
+        replacement: 4225a859241c.mylabserver.com:9115             
+
+  - job_name: 'blackbox_dns'
+    metrics_path: /probe
+    params:
+      module: [dns_tcp]
+    static_configs:
+      - targets: ["1.0.0.1", "1.1.1.1", "8.8.4.4", "8.8.8.8"]        
+    relabel_configs:
+      - source_labels: [__address__]
+        target_label: __param_target
+      - source_labels: [__param_target]
+        target_label: instance
+      - target_label: __address__
+        replacement: 4225a859241c.mylabserver.com:9115         
+
+  # - job_name: node
+  #   metrics_path: /probe
+  #   params:
+  #     module: [ssh_banner]  # Probing the SSH banner
+  #   consul_sd_configs:
+  #     - server: 'localhost:8500'  # Consul server running at localhost:8500
+  #   relabel_configs:
+  #     - source_labels: [__meta_consul_address]  # Get the address from Consul metadata
+  #       regex: (.*)  # Capture the full address
+  #       replacement: '${1}:22'  # Append port 22 for SSH
+  #       target_label: __param_target  # Set the target parameter for the blackbox probe
+  #     - source_labels: [__param_target]  # Use the relabeled target
+  #       target_label: instance  # Label the instance
+  #     - target_label: __address__  # Relabel the address to the blackbox exporter's location
+  #       replacement: 192.168.1.111:9115  # Blackbox exporter running on localhost at port 9115

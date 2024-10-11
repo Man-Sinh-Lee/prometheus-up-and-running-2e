@@ -1,0 +1,45 @@
+ # create new
+
+global:
+  # SMTP server to use
+  smtp_smarthost: 'localhost:25'
+  # require TLS or not
+  smtp_require_tls: false
+  # notification sender's Email address
+  smtp_from: 'Alertmanager <man-sinh-lee@4225a859241c.mylabserver.com>'
+  # if set SMTP Auth on SMTP server, set below, too
+  # smtp_auth_username: 'alertmanager'
+  # smtp_auth_password: 'password'
+
+route:
+  # Receiver name for notification
+  receiver: 'email-notice'
+  # grouping definition
+  group_by: ['alertname', 'Service', 'Stage', 'Role']
+  group_wait:      30s
+  group_interval:  5m
+  repeat_interval: 4h
+
+receivers:
+# any name of Receiver
+- name: 'email-notice'
+  email_configs:
+  # destination Email address
+  - to: "man-sinh-lee@4225a859241c.mylabserver.com"
+
+# route:
+#   group_by: ['alertname']
+#   group_wait: 30s
+#   group_interval: 5m
+#   repeat_interval: 1h
+#   receiver: 'web.hook'
+# receivers:
+#   - name: 'web.hook'
+#     webhook_configs:
+#       - url: 'http://127.0.0.1:5001/'
+# inhibit_rules:
+#   - source_match:
+#       severity: 'critical'
+#     target_match:
+#       severity: 'warning'
+#     equal: ['alertname', 'dev', 'instance']

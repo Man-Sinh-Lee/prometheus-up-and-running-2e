@@ -1,0 +1,11 @@
+  groups:
+    - name: High_CPU_Alert
+      rules:
+        - alert: HighCPUUsage
+          expr: rate(node_cpu_seconds_total[5m]) > 0.8
+          for: 5m
+          labels:
+            severity: critical
+          annotations:
+            summary: "High CPU usage on {{ $labels.instance }}"
+            description: "CPU usage is above 80% for more than 5 minutes."
