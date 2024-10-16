@@ -38,7 +38,7 @@ scrape_configs:
       # if using self-signed certificate, set [true]
       insecure_skip_verify: true
     basic_auth:
-      username: 'admin'
+      username: 'prometheus'
       password: 'bWFuLXNpbmgtbGVlQE1hY01pbmkK'    
     static_configs:
       - targets: ['4225a859241c.mylabserver.com:9090']
@@ -56,15 +56,15 @@ scrape_configs:
     static_configs:
       - targets: ["4225a859241c.mylabserver.com:9104", "4225a859242c.mylabserver.com:9104", "4225a859243c.mylabserver.com:9104", "4225a859244c.mylabserver.com:9104"]
 
-  - job_name: grok
-    honor_labels: true
-    static_configs:
-      - targets: ["4225a859241c.mylabserver.com:9144", "4225a859242c.mylabserver.com:9144", "4225a859243c.mylabserver.com:9144", "4225a859244c.mylabserver.com:9144"]      
+  # - job_name: grok
+  #   honor_labels: true
+  #   static_configs:
+  #     - targets: ["4225a859241c.mylabserver.com:9144", "4225a859242c.mylabserver.com:9144", "4225a859243c.mylabserver.com:9144", "4225a859244c.mylabserver.com:9144"]      
 
-  - job_name: haproxy
-    honor_labels: true
-    static_configs:
-      - targets: ["4225a859241c.mylabserver.com:9101"]
+  # - job_name: haproxy
+  #   honor_labels: true
+  #   static_configs:
+  #     - targets: ["4225a859241c.mylabserver.com:9101"]
     # metric_relabel_configs:
     #   - source_labels: [__name__]
     #     regex: 'haproxy_(process_|frontend_|listener_|backend_|server_check_status).*'
@@ -73,7 +73,7 @@ scrape_configs:
   - job_name: nginx_exporter
     honor_labels: true
     static_configs:
-      - targets: ["4225a859242c.mylabserver.com:9113", "4225a859243c.mylabserver.com:9113", "4225a859244c.mylabserver.com:9113"] 
+      - targets: ["4225a859241c.mylabserver.com:9113", "4225a859242c.mylabserver.com:9113", "4225a859243c.mylabserver.com:9113", "4225a859244c.mylabserver.com:9113"] 
 
   # - job_name: 'book_app'
   #   scrape_interval: 5s
@@ -100,11 +100,11 @@ scrape_configs:
   #   static_configs:
   #     - targets: ['4225a859241c.mylabserver.com:9107', '4225a859242c.mylabserver.com:9107', '4225a859243c.mylabserver.com:9107', '4225a859244c.mylabserver.com:9100']      
 
-  - job_name: 'cadvisor'
-    scrape_interval: 5s
-    scrape_timeout: 5s  
-    static_configs:
-      - targets: ['4225a859241c.mylabserver.com:8080']
+  # - job_name: 'cadvisor'
+  #   scrape_interval: 5s
+  #   scrape_timeout: 5s  
+  #   static_configs:
+  #     - targets: ['4225a859241c.mylabserver.com:8080']
 
   - job_name: 'blackbox_icmp'
     metrics_path: /probe
