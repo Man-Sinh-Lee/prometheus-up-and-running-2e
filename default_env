@@ -1,0 +1,107 @@
+4225a859242c.mylabserver.com | CHANGED | rc=0 >>
+APACHE_EXPORTER_OPTS="--scrape_uri=http://127.0.0.1:8080/server-status?auto --web.listen-address=172.31.20.58:9117 --telemetry.endpoint=/metrics"
+BLACKBOX_EXPORTER_OPTS="--config.file=/etc/prometheus/blackbox.yml"
+GRUB_CMDLINE_LINUX="console=ttyS0,115200n8 console=tty0 net.ifnames=0 rd.blacklist=nouveau nvme_core.io_timeout=4294967295 crashkernel=auto"
+GRUB_TIMEOUT=0
+GRUB_ENABLE_BLSCFG=true
+LS_HOME="/usr/share/logstash"
+LS_SETTINGS_DIR="/etc/logstash"
+LS_PIDFILE="/var/run/logstash.pid"
+LS_USER="logstash"
+LS_GROUP="logstash"
+LS_GC_LOG_FILE="/var/log/logstash/gc.log"
+LS_OPEN_FILES="16384"
+LS_NICE="19"
+SERVICE_NAME="logstash"
+SERVICE_DESCRIPTION="logstash"
+MYSQLD_EXPORTER_OPTS=""
+NGINX_EXPORTER_OPTS="--web.listen-address=0.0.0.0:9113 --nginx.scrape-uri http://127.0.0.1/metrics"NODE_EXPORTER_OPTS=""
+# useradd defaults file
+GROUP=100
+HOME=/home
+INACTIVE=-1
+EXPIRE=
+SHELL=/bin/bash
+SKEL=/etc/skel
+CREATE_MAIL_SPOOL=yes
+4225a859244c.mylabserver.com | CHANGED | rc=0 >>
+APACHE_EXPORTER_OPTS="--scrape_uri=http://127.0.0.1:8080/server-status?auto --web.listen-address=172.31.29.183:9117 --telemetry.endpoint=/metrics"
+BLACKBOX_EXPORTER_OPTS="--config.file=/etc/prometheus/blackbox.yml"
+GRUB_CMDLINE_LINUX="console=ttyS0,115200n8 console=tty0 net.ifnames=0 rd.blacklist=nouveau nvme_core.io_timeout=4294967295 crashkernel=auto"
+GRUB_TIMEOUT=0
+GRUB_ENABLE_BLSCFG=true
+LS_HOME="/usr/share/logstash"
+LS_SETTINGS_DIR="/etc/logstash"
+LS_PIDFILE="/var/run/logstash.pid"
+LS_USER="logstash"
+LS_GROUP="logstash"
+LS_GC_LOG_FILE="/var/log/logstash/gc.log"
+LS_OPEN_FILES="16384"
+LS_NICE="19"
+SERVICE_NAME="logstash"
+SERVICE_DESCRIPTION="logstash"
+MYSQLD_EXPORTER_OPTS=""
+NGINX_EXPORTER_OPTS="--web.listen-address=0.0.0.0:9113 --nginx.scrape-uri http://127.0.0.1/metrics"NODE_EXPORTER_OPTS=""
+# useradd defaults file
+GROUP=100
+HOME=/home
+INACTIVE=-1
+EXPIRE=
+SHELL=/bin/bash
+SKEL=/etc/skel
+CREATE_MAIL_SPOOL=yes
+4225a859241c.mylabserver.com | CHANGED | rc=0 >>
+APACHE_EXPORTER_OPTS=""
+BLACKBOX_EXPORTER_OPTS="--config.file=/etc/prometheus/blackbox.yml"
+GRUB_CMDLINE_LINUX="console=ttyS0,115200n8 console=tty0 net.ifnames=0 rd.blacklist=nouveau nvme_core.io_timeout=4294967295 crashkernel=auto"
+GRUB_TIMEOUT=0
+GRUB_ENABLE_BLSCFG=true
+INFLUXD_CONFIG_PATH=/etc/influxdb/config.toml
+LS_HOME="/usr/share/logstash"
+LS_SETTINGS_DIR="/etc/logstash"
+LS_PIDFILE="/var/run/logstash.pid"
+LS_USER="logstash"
+LS_GROUP="logstash"
+LS_GC_LOG_FILE="/var/log/logstash/gc.log"
+LS_OPEN_FILES="16384"
+LS_NICE="19"
+SERVICE_NAME="logstash"
+SERVICE_DESCRIPTION="logstash"
+MYSQLD_EXPORTER_OPTS=""
+NGINX_EXPORTER_OPTS="--web.listen-address=0.0.0.0:9113 --nginx.scrape-uri http://127.0.0.1/metrics"NODE_EXPORTER_OPTS=""
+PROMETHEUS_OPTS='--config.file=/etc/prometheus/prometheus.yml --storage.tsdb.path=/var/lib/prometheus/data --web.console.libraries=/usr/share/prometheus/console_libraries --web.console.templates=/usr/share/prometheus/consoles --web.config.file=/etc/prometheus/web.yml --log.level=debug'
+PUSHGATEWAY_OPTS=""
+# useradd defaults file
+GROUP=100
+HOME=/home
+INACTIVE=-1
+EXPIRE=
+SHELL=/bin/bash
+SKEL=/etc/skel
+CREATE_MAIL_SPOOL=yes
+4225a859243c.mylabserver.com | CHANGED | rc=0 >>
+APACHE_EXPORTER_OPTS="--scrape_uri=http://127.0.0.1:8080/server-status?auto --web.listen-address=172.31.18.97:9117 --telemetry.endpoint=/metrics"
+BLACKBOX_EXPORTER_OPTS="--config.file=/etc/prometheus/blackbox.yml"
+GRUB_CMDLINE_LINUX="console=ttyS0,115200n8 console=tty0 net.ifnames=0 rd.blacklist=nouveau nvme_core.io_timeout=4294967295 crashkernel=auto"
+GRUB_TIMEOUT=0
+GRUB_ENABLE_BLSCFG=true
+LS_HOME="/usr/share/logstash"
+LS_SETTINGS_DIR="/etc/logstash"
+LS_PIDFILE="/var/run/logstash.pid"
+LS_USER="logstash"
+LS_GROUP="logstash"
+LS_GC_LOG_FILE="/var/log/logstash/gc.log"
+LS_OPEN_FILES="16384"
+LS_NICE="19"
+SERVICE_NAME="logstash"
+SERVICE_DESCRIPTION="logstash"
+MYSQLD_EXPORTER_OPTS=""
+NGINX_EXPORTER_OPTS="--web.listen-address=0.0.0.0:9113 --nginx.scrape-uri http://127.0.0.1/metrics"NODE_EXPORTER_OPTS=""
+# useradd defaults file
+GROUP=100
+HOME=/home
+INACTIVE=-1
+EXPIRE=
+SHELL=/bin/bash
+SKEL=/etc/skel
+CREATE_MAIL_SPOOL=yes

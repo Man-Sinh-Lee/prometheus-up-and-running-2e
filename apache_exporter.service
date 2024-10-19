@@ -1,0 +1,20 @@
+4225a859242c.mylabserver.com | CHANGED | rc=0 >>
+# /usr/lib/systemd/system/apache_exporter.service
+# -*- mode: conf -*-
+
+[Unit]
+Description=Prometheus exporter Apache webserver mertics.
+Documentation=https://github.com/Lusitaniae/apache_exporter
+After=network.target
+
+[Service]
+EnvironmentFile=-/etc/default/apache_exporter
+User=prometheus
+ExecStart=/usr/bin/apache_exporter $APACHE_EXPORTER_OPTS
+ExecReload=/bin/kill -HUP $MAINPID
+Restart=on-failure
+RestartSec=5s
+
+
+[Install]
+WantedBy=multi-user.target
