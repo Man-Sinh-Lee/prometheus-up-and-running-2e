@@ -4,4 +4,4 @@ tls_server_config:
 
 # specify username and password generated above
 basic_auth_users:
-  prometheus: $2y$05$V5Coaen1b4FP6UIwVd1x4OIxTkluwf6AMEHTHiesQBYG3kmnc17z.
+  prometheus: $2y$05$nIM/35lTlE8.g1gMN50qcOIj1gGk1oFhlKaBf0.je0jgXiZIdT03K
