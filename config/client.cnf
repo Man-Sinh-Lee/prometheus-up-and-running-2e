@@ -6,7 +6,8 @@
 
 [client]
 user=prometheus
-password=CHANGEME
+password=PrometheusP@ssw0rd
+
 # This group is not read by mysql client library,
 # If you use the same .cnf file for MySQL and MariaDB,
 # use it for MariaDB-only client options
